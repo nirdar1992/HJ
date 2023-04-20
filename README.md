@@ -3,12 +3,12 @@
 ### Data Folder
 Training history data csv files by month.
 
-stats.json file:
+**stats.json file:**
 
 Dictionary that contains for each training drill it's computed values [for the "Distance per Minute", "SpeedZone >=4m/s (km)", "SpeedZone >=5m/s (km)", "SpeedZone >=7m/s (km)", "Accel Zone >= 3m/s²" and "Decel Zone <= -3m/s²" parameters] for the all team and for each player seperately.
 
 The dictionary is arranged as follows:
-
+`
 {
 
 "Drill_1_Name": {
@@ -66,5 +66,5 @@ The dictionary is arranged as follows:
 } // end of "Drill_1_Name" dict
 
 "Drill_2_Name: {...}
-                                                                    
+`
                                                                     
