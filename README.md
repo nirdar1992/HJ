@@ -1,6 +1,5 @@
-# HAPOEL JERUSALEM FC PROJECT
-## Project Repo
-### Data Folder
+# HAPOEL JERUSALEM FC PROJECT - Project Repo
+## Data Folder
 1. **Training history data csv files by month.**
 
 2. **stats.json file:**
@@ -83,20 +82,20 @@ The dictionary is arranged as follows:
 ```
 
 
-### new_data_update.py file
+## new_data_update.py file
 Updating the stats.json and families.json files when reciving new data csv file.
 
 **functions explanations marks are inside the file.**
 
 
-### build_training_session.py file
+## build_training_session.py file
 1. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
 2. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
 3. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
 4. 
 **functions explanations marks are inside the file.**
 
-### helper_functions.py file
+## helper_functions.py file
 Contains different commonly used functions.
 
 **functions explanations marks are inside the file.**
