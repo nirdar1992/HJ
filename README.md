@@ -13,7 +13,7 @@ The dictionary is arranged as follows:
   "Drill_1_Name": {
                   "num of sets": number of sets recorded and computed, 
                   "parameters": {
-                                  "Distance per Minute": {
+                                  "Distance per Minute (alt.)": {
                                                           "dist. type": parameter's distribution type,
                                                           "team's mean": all team's mean,
                                                           "team's variance": all team's variance,
@@ -82,3 +82,18 @@ The dictionary is arranged as follows:
 } // end of families dict
 ```
 
+
+### new_data_update.py file
+Updating the stats.json and families.json files when reciving new data csv file.
+**functions explanations marks are inside the file.**
+
+
+### build_training_session.py file
+1. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
+2. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
+3. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
+**functions explanations marks are inside the file.**
+
+### helper_functions.py file
+Contains different commonly used functions.
+**functions explanations marks are inside the file.**
