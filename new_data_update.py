@@ -1,16 +1,3 @@
-'''
-README על איך הכל בנוי
-V שמות של כל התרגילים והמשפחות לאורין
-פונקציה שמקבלת מספר תרגילים ופלט מה הנתונים של כל תרגיל ומה סהכ לכל האימון
-פונקציה שמקבל ערך לדיסטנס ואיזה משפחות תרגילים ומוצא את התת תרגילים שיגיעו למספר הזה
-
-למיין תרגגילים
-כשיש שתי משפחלות אז למיין אחד מהקטן לגדול ואחד מהגדול לקטן ואז למצוא את כל הזוגות שמגיעים לאיקס שאותו מחפשים
-עם שלוש משפחות ומעלה צריך לאחד משפחות עד שנגיע לשתי קבוצות
-
-הם יהיו קלט אחד של השני
-'''
-
 import pandas as pd
 import json
 from helper_functions import *
@@ -21,12 +8,13 @@ global stats_dict
 with open(json_file) as js_file:
     stats_dict = json.load(js_file)
 
+# load families dict
 families_file = "data/families.json"
 global families
 with open(families_file) as js_file:
     families = json.load(js_file)
 
-# load new data
+# load new data csv file
 new_data = pd.read_csv(r'C:\Users\nird\PycharmProjects\HJ\data\feb23.csv')
 players_idx = list(new_data.index)
 drills = list(new_data.columns)
@@ -36,9 +24,9 @@ column_num = len(drills) - 1
 while column_num != -1:
     # remove duplicated column names
     if '.' in drills[column_num]:
-        dot_index = drills[column_num].index('.')
-        drills[column_num] = drills[column_num][:dot_index]
-        a = drills[column_num]
+        drills[column_num] = remove_num_of_parameter_from_drill_name(drills[column_num])
+
+    # concat columns titles to the real drill name due to coma in the original drill name
     if drills[column_num].startswith(" ") or (drills[column_num-1].startswith("16") and drills[column_num].startswith("12M)") or drills[column_num].startswith("8M)")):
         temp_iter = column_num - 1
         temp_name = drills[column_num]
@@ -46,25 +34,24 @@ while column_num != -1:
         while drills[temp_iter].startswith(" ") or drills[temp_iter].startswith("16"):
             # remove duplicated column names
             if '.' in drills[temp_iter]:
-                dot_index = drills[temp_iter].index('.')
-                drills[temp_iter] = drills[temp_iter][:dot_index]
+                drills[temp_iter] = remove_num_of_parameter_from_drill_name(drills[temp_iter])
             temp_name = drills[temp_iter] + temp_name
             drills.pop(temp_iter)
             temp_iter -= 1
         # remove duplicated column names
         if '.' in drills[temp_iter]:
-            dot_index = drills[temp_iter].index('.')
-            drills[temp_iter] = drills[temp_iter][:dot_index]
+            drills[temp_iter] = remove_num_of_parameter_from_drill_name(drills[temp_iter])
         drills[temp_iter] += temp_name
-
         column_num = temp_iter
     column_num -= 1
 
+# set the new fixed columns names
 new_data = new_data.iloc[:, :len(drills)]
 new_data.set_axis(drills, axis=1, inplace=True)
 
 
 for drill in drills:
+    # initialize list that stores name of players which did not participate in the drill
     didnt_particpated[drill] = []
 for column_idx in range(len(drills)):
     # players column
@@ -73,8 +60,7 @@ for column_idx in range(len(drills)):
     full_drill_name = drills[column_idx]
     # remove duplicated column names
     if '.' in full_drill_name:
-        dot_index = full_drill_name.index('.')
-        full_drill_name = full_drill_name[:dot_index]
+        full_drill_name = remove_num_of_parameter_from_drill_name(full_drill_name)
     # extract drill's name without set num
     if full_drill_name[-1] == ")" and full_drill_name[-3] == "(":
         drill_name = full_drill_name[:-4]
@@ -150,7 +136,6 @@ for column_idx in range(len(drills)):
 
     # update families dict
     fam_name = extract_family_name(drill_name)
-
     if families.get(fam_name, {}) == {}:
         families[fam_name] = {}
     if families[fam_name].get(drill_name, {}) == {}:
@@ -158,17 +143,28 @@ for column_idx in range(len(drills)):
     families[fam_name][drill_name]['parameters'][parameter]["team's mean"] = team_mean
     families[fam_name][drill_name]['parameters'][parameter]["team's variance"] = team_var
 
+# sort families dict by family name
+families = dict(sorted(families.items(), key=lambda x: x[0]))
+# sort each family drills by "Distance per Minute (alt.)" parameter
+for fam in families:
+    families[fam] = dict(sorted(families[fam].items(), key=lambda x: x[1]['parameters']["Distance per Minute (alt.)"]["team's mean"]))
 
+# sort stats dict by drill name
+stats_dict = dict(sorted(stats_dict.items(), key=lambda x: x[0]))
+
+'''
 # display table
 df = pd.DataFrame.from_dict(stats_dict)
 from tabulate import tabulate
 print(tabulate(df, headers='keys', tablefmt='psql'))
+'''
 
-# write the updated stats to our json 'stats' file
+# write the updated stats to the 'stats' json file
 out_file = open(json_file, "w")
 json.dump(stats_dict, out_file, indent="")
 out_file.close()
 
+# write the updated family groups to the 'families' json file
 out_file = open(families_file, "w")
 json.dump(families, out_file, indent="")
 out_file.close()
