@@ -1,5 +1,5 @@
 # HAPOEL JERUSALEM FC PROJECT - Project Repo
-## Data Folder
+## 'data' Folder
 1. **oldGPSdata folder:**
 
 Historical training data csv files by month.
@@ -111,8 +111,8 @@ The dictionary is arranged as follows:
     } // end of constrains dict
 } // end of the BuildSession dict
 ```
-
-## project_classes.py file
+## 'app' Folder
+1. **project_classes.py file:**
 Gathers all project's classes.
 
 The 'SessionBuild' class is for the building sessions part, gets the BuildSession.json file and creates the class.
@@ -120,20 +120,20 @@ The 'SessionBuild' class is for the building sessions part, gets the BuildSessio
 **functions explanations marks are inside the file.**
 
 
-## new_data_update.py file
+2. **new_data_update.py file:**
 Updating the stats.json and families.json files when reciving new data csv file.
 
 **functions explanations marks are inside the file.**
 
 
-## build_training_session.py file
+3. **build_training_session.py file:**
 1. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
 2. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
 3. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
-4. 
+
 **functions explanations marks are inside the file.**
 
-## helper_functions.py file
+4. **helper_functions.py file:**
 Contains different commonly used functions.
 
 **functions explanations marks are inside the file.**
