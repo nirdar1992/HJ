@@ -6,9 +6,9 @@ families = open_json_file(families_file)
 
 
 class SessionBuild:
-    def __init__(self, session_dict_path="data/BuildSession.json"):
+    def __init__(self, session_dict_path="../data/BuildSession.json"):
         '''
-        :param session_dict_path: path to the desired session json file, "data/BuildSession.json" by default
+        :param session_dict_path: path to the desired session json file, "../data/BuildSession.json" by default
         '''
         self.session_dict = open_json_file(session_dict_path)
         self.session_fams = self.session_dict["session"].get("fams")
@@ -40,7 +40,7 @@ class SessionBuild:
         :return: runs at initialization, checks the validation of the constrains parameters
         '''
         for con in self.constrains_dict:
-            if type(fam) != list:
+            if type(self.constrains_dict[con]['fams']) != list:
                 raise ValueError("In " + con + ": families input should be a list of families.")
             for fam in self.constrains_dict[con]['fams']:
                 if fam not in families:
