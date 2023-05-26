@@ -1,14 +1,15 @@
 # HAPOEL JERUSALEM FC PROJECT - Project Repo
+
 ## 'data' Folder
 1. **oldGPSdata folder:**
 
-Historical training data csv files by month.
+    Historical training data csv files by month.
 
 2. **stats.json file:**
 
-Dictionary that contains for each training drill it's computed values [for the "Distance per Minute", "SpeedZone >=4m/s (km)", "SpeedZone >=5m/s (km)", "SpeedZone >=7m/s (km)", "Accel Zone >= 3m/s²" and "Decel Zone <= -3m/s²" parameters] for the all team and for each player seperately.
+    Dictionary that contains for each training drill it's computed values [for the "Distance per Minute", "SpeedZone >=4m/s (km)", "SpeedZone >=5m/s (km)", "SpeedZone >=7m/s (km)", "Accel Zone >= 3m/s²" and "Decel Zone <= -3m/s²" parameters] for the all team and for each player seperately.
 
-The dictionary is arranged as follows:
+    The dictionary is arranged as follows:
 ```
 {
   "Drill_1_Name": {
@@ -43,9 +44,9 @@ The dictionary is arranged as follows:
 
 3. **families.json file:**
 
-Dictionary that contains all the drills seperated by groups of context, as we call "family".
+    Dictionary that contains all the drills seperated by groups of context, as we call "family".
 
-The dictionary is arranged as follows:
+    The dictionary is arranged as follows:
 ```
 {
   "Family_1_Name": {
@@ -85,9 +86,9 @@ The dictionary is arranged as follows:
 
 4. **BuildSession.json file:**
 
-Dictionary that contains the desired drill families to build a session and their constrains.
+    Dictionary that contains the desired drill families to build a session and their constrains.
 
-The dictionary is arranged as follows:
+    The dictionary is arranged as follows:
 ```
 {
     session:
@@ -111,29 +112,37 @@ The dictionary is arranged as follows:
     } // end of constrains dict
 } // end of the BuildSession dict
 ```
+
 ## 'app' Folder
 1. **project_classes.py file:**
-Gathers all project's classes.
 
-The 'SessionBuild' class is for the building sessions part, gets the BuildSession.json file and creates the class.
+    Gathers all project's classes.
 
-**functions explanations marks are inside the file.**
+    The 'SessionBuild' class is for the building sessions part, gets the BuildSession.json file and creates the class.
+
+    **functions explanations marks are inside the file.**
 
 
 2. **new_data_update.py file:**
-Updating the stats.json and families.json files when reciving new data csv file.
 
-**functions explanations marks are inside the file.**
+    Updating the stats.json and families.json files when reciving new data csv file.
+
+    **functions explanations marks are inside the file.**
 
 
 3. **build_training_session.py file:**
-    a. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
-    b. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
-    c. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
 
-**functions explanations marks are inside the file.**
+    a. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
+    
+    b. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
+    
+    c. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
+    
+
+    **functions explanations marks are inside the file.**
 
 4. **helper_functions.py file:**
+
     Contains different commonly used functions.
 
     **functions explanations marks are inside the file.**
