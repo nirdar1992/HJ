@@ -1,6 +1,11 @@
 import json
 
 
+def find_parameter(parameter, drill_dict):
+    if parameter not in drill_dict["parameters"]:
+        raise ValueError(parameter, "wasn't found in the drill's dict, please check your spelling.")
+
+
 def extract_family_name(drill_name):
     '''
     :param drill_name: drill's name as a string
@@ -35,7 +40,7 @@ def map_drill_fam(drill):
         if drill in families[fam]:
             return fam
     # if not found - raise an Error
-    raise ValueError("Drill was not found in the families dict.\n please check you've spelled it right.")
+    raise ValueError(drill + " was not found in the families dict, please check you've spelled it right.")
 
 
 def remove_num_of_parameter_from_drill_name(drill):

@@ -72,7 +72,7 @@ for column_idx in range(len(drills)):
 
     # if drill is not in the previous stats - initialize it's variables
     if drill_name not in stats_dict:
-        stats_dict[drill_name] = {'num of sets': 0, 'parameters':{'Distance per Minute (alt.)': {'dist. type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=4m/s (km)': {'dist. type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=5m/s (km)': {'dist. type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=7m/s (km)': {'dist. type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'Accel Zone >= 3m/s²': {'dist. type': 'poisson', "team's mean": 0, "team's variance": 0, 'players':{}}, 'Decel Zone <= -3m/s²': {'dist. type': 'poisson', "team's mean": 0, "team's variance": 0, 'players':{}}}}
+        stats_dict[drill_name] = {'num of sets': 0, 'parameters':{'Distance per Minute (alt.)': {'dist type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=4m/s (km)': {'dist type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=5m/s (km)': {'dist type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'SpeedZone >=7m/s (km)': {'dist type': 'normal', "team's mean": 0, "team's variance": 0, 'players':{}}, 'Accel Zone >= 3m/s²': {'dist type': 'poisson', "team's mean": 0, "team's variance": 0, 'players':{}}, 'Decel Zone <= -3m/s²': {'dist type': 'poisson', "team's mean": 0, "team's variance": 0, 'players':{}}}}
     drill_values = stats_dict[drill_name]['parameters'][parameter].get('players', {})
 
     # update number of sets
@@ -90,7 +90,7 @@ for column_idx in range(len(drills)):
             continue
         player_name = new_data.iloc[player_idx,0]
         # get player's previous stats
-        player_value = stats_dict[drill_name]['parameters'][parameter]['players'].get(player_name, [0,0])
+        player_value = stats_dict[drill_name]['parameters'][parameter]['players'].get(player_name, [0, 0])
         player_mean = 0
         player_squared_mean = 0
         # player's current set value - format for each player : [player's mean, [set1 value, precintile], [set2 value, precintile]...]
@@ -135,7 +135,7 @@ for column_idx in range(len(drills)):
     stats_dict[drill_name]['parameters'][parameter]["team's variance"] = team_var
 
     # update families dict
-    fam_name = extract_family_name(drill_name)
+    fam_name = map_drill_fam(drill_name)
     if families.get(fam_name, {}) == {}:
         families[fam_name] = {}
     if families[fam_name].get(drill_name, {}) == {}:
