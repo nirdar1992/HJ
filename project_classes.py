@@ -1,19 +1,21 @@
-from helper_functions import map_drill_fam
-import json
+from helper_functions import *
 
-families_file = "data/families.json"
 global families
-with open(families_file) as js_file:
-    families = json.load(js_file)
+families_file = "data/families.json"
+families = open_json_file(families_file)
 
-    
+
 class SessionBuild:
-    def __init__(self, session_dict):
-        self.session_fams = session_dict["session"].get("fams")
-        self.parameter = session_dict["session"].get("parameter")
-        self.min_val = session_dict["session"].get("min_val")
-        self.max_val = session_dict["session"].get("max_val")
-        self.constrains_dict = session_dict.get("constrains", [])
+    def __init__(self, session_dict_path="data/BuildSession.json"):
+        '''
+        :param session_dict_path: path to the desired session json file, "data/BuildSession.json" by default
+        '''
+        self.session_dict = open_json_file(session_dict_path)
+        self.session_fams = self.session_dict["session"].get("fams")
+        self.parameter = self.session_dict["session"].get("parameter")
+        self.min_val = self.session_dict["session"].get("min_val")
+        self.max_val = self.session_dict["session"].get("max_val")
+        self.constrains_dict = self.session_dict.get("constrains", [])
         self.valid_parameters = ["Distance per Minute (alt.)", "SpeedZone >=4m/s (km)", "SpeedZone >=5m/s (km)", "SpeedZone >=7m/s (km)", "Accel Zone >= 3m/s²", "Decel Zone <= -3m/s²"]
         # validate input params
         self.check_session_params()

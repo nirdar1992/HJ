@@ -6,10 +6,9 @@ from scipy.stats import norm
 # define the precent we would consider to exceed from our distance target value
 SD_MEAN = 0.2
 # load families dict
-families_file = "data/families.json"
 global families
-with open(families_file) as js_file:
-    families = json.load(js_file)
+families_file = "data/families.json"
+families = open_json_file(families_file)
 
 
 def rec_sum(drills, val, fam_name, parameter, sd, sub_drills=[]):
@@ -61,7 +60,7 @@ def find_equal_drill(drill_name, parameter="Distance per Minute (alt.)"):
     fam_drills.remove(drill_name)
     # call the "rec_sum" function and find our drills, print/return it
     result = rec_sum(fam_drills, mean_to_reach, fam_name, parameter, mean_to_reach*SD_MEAN)
-    #pprint.pprint(result)
+    pprint.pprint(result)
     return result
 
 
@@ -83,7 +82,7 @@ def get_session_val(parameter="Distance per Minute (alt.)", *drills):
         find_parameter(parameter, families[drill_fam][drill])
         total_dist += families[drill_fam][drill]["parameters"][parameter]["team's mean"]
     session_dict[parameter] = total_dist
-    #pprint.pprint(session_dict)
+    pprint.pprint(session_dict)
     return session_dict
 
 
@@ -91,7 +90,7 @@ def build_drills_combination(fam1, fam2, parameter):
     '''
     helper function to the "build_session" function - find all unite drills combinations by families
     :param fam1: family name as a string
-    :param fam2: family name as a string OR list of drills combinationpps
+    :param fam2: family name as a string OR list of drills combinations
     :param parameter: the parameter to sum
     :return: list of all drills combinations between two or more families
     '''
@@ -199,5 +198,33 @@ def build_session(sb):
                     # constrains did not meet with the training session option
                     del session_options[session_title]
                     option_num -= 1
-    #pprint.pprint(session_options)
+    pprint.pprint(session_options)
     return session_options
+
+
+build_session(SessionBuild())
+
+
+'''
+V להוזיף גם שונות משותפת בהדפסה של כל האימון
+
+לתקן את ההדפסות שיהיה קריא V
+
+הסטיית תקן שתהיה RANGE שזה יהיה גם פרמטר שהפונקציה מקבלת V
+
+מה הסהסתברות שנחרוג מהערכים האלה? להניח התפלגולת נורמלית ולחשב V
+
+רוצים גם לבחור את הפרמטר שלפיו נעבוד V
+
+שהקוד יקבל גם התניות, נניח שהטופס ספיד לא יעלה על ערך מסויים בתרגיל מסויים V
+
+יש באג במציאת זוגות - לדבאג V
+
+בדיקות ארגומנטים והקפצת שגיאות V
+
+תיקון הערות בפונקציות V
+
+לכתוב את הדוח אמצע ולתת לאורין שישלים
+
+add explanation for data constraines in functions and in functions parameters and in git
+'''

@@ -1,6 +1,28 @@
 import json
 
 
+def open_json_file(path):
+    '''
+    :param path: path to json file
+    :return: file's data as dictionary
+    '''
+    with open(path) as js_file:
+        jf = json.load(js_file)
+    return jf
+
+
+def write_to_json_file(json_file, data_dict):
+    '''
+    :param json_file: path to json file
+    :param data_dict: dict to write to the json file
+    :return: writes data to json file, void func
+    '''
+    out_file = open(json_file, "w")
+    json.dump(data_dict, out_file, indent="")
+    out_file.close()
+    return
+
+
 def find_parameter(parameter, drill_dict):
     if parameter not in drill_dict["parameters"]:
         raise ValueError(parameter, "wasn't found in the drill's dict, please check your spelling.")
@@ -33,8 +55,7 @@ def map_drill_fam(drill):
     '''
     # load families json file
     families_file = "data/families.json"
-    with open(families_file) as js_file:
-        families = json.load(js_file)
+    families = open_json_file(families_file)
     # iterate over each family until found
     for fam in families:
         if drill in families[fam]:

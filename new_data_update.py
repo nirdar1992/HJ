@@ -3,16 +3,14 @@ import json
 from helper_functions import *
 
 # load previous stats
-json_file = "data/stats.json"
 global stats_dict
-with open(json_file) as js_file:
-    stats_dict = json.load(js_file)
+json_file = "data/stats.json"
+stats_dict = open_json_file(json_file)
 
 # load families dict
-families_file = "data/families.json"
 global families
-with open(families_file) as js_file:
-    families = json.load(js_file)
+families_file = "data/families.json"
+families = open_json_file(families_file)
 
 # load new data csv file
 new_data = pd.read_csv(r'C:\Users\nird\PycharmProjects\HJ\data\feb23.csv')
@@ -160,11 +158,7 @@ print(tabulate(df, headers='keys', tablefmt='psql'))
 '''
 
 # write the updated stats to the 'stats' json file
-out_file = open(json_file, "w")
-json.dump(stats_dict, out_file, indent="")
-out_file.close()
+write_to_json_file(json_file, stats_dict)
 
 # write the updated family groups to the 'families' json file
-out_file = open(families_file, "w")
-json.dump(families, out_file, indent="")
-out_file.close()
+write_to_json_file(families_file, families)
