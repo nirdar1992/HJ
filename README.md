@@ -127,13 +127,13 @@ Updating the stats.json and families.json files when reciving new data csv file.
 
 
 3. **build_training_session.py file:**
-1. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
-2. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
-3. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
+    a. Building training session according to given type of drills and a "Distance per Minute (alt.)" target value.
+    b. Sums up the "Distance per Minute (alt.)" parameter for a given training session.
+    c. Finding alternative drill/s for a giving drill by it's "Distance per Minute (alt.)" value.
 
 **functions explanations marks are inside the file.**
 
 4. **helper_functions.py file:**
-Contains different commonly used functions.
+    Contains different commonly used functions.
 
-**functions explanations marks are inside the file.**
+    **functions explanations marks are inside the file.**
