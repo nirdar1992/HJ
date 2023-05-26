@@ -6,30 +6,7 @@ global families
 with open(families_file) as js_file:
     families = json.load(js_file)
 
-# session dict for the build session function
-'''
-{
-    session:
-    {
-        fams: [fam1,fam2...],
-        parameter: parameter to sum,
-        min_val: float,
-        max_val: float,
-    },
-    constrains:
-    {
-        constrain1:
-        {   
-            fams: [fam1,fam2...],
-            parameter: parameter,
-            operator: range/sum range,
-            min_val: float,
-            max_val: float,
-        },
-        constrain2: {...}
-    }
-} 
-'''
+    
 class SessionBuild:
     def __init__(self, session_dict):
         self.session_fams = session_dict["session"].get("fams")
