@@ -1,6 +1,8 @@
 # HAPOEL JERUSALEM FC PROJECT - Project Repo
 ## Data Folder
-1. **Training history data csv files by month.**
+1. **oldGPSdata folder:**
+
+Historical training data csv files by month.
 
 2. **stats.json file:**
 
