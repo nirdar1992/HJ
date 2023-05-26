@@ -81,6 +81,42 @@ The dictionary is arranged as follows:
 } // end of families dict
 ```
 
+4. **BuildSession.json file:**
+
+Dictionary that contains the desired drill families to build a session and their constrains.
+
+The dictionary is arranged as follows:
+```
+{
+    session:
+    {
+        fams: [fam1,fam2...],
+        parameter: parameter to sum,
+        min_val: float,
+        max_val: float,
+    }, // end of session dict
+    constrains:
+    {
+        constrain1 name:
+        {   
+            fams: [fam1,fam2...],
+            parameter: parameter,
+            operator: range/sum range,
+            min_val: float,
+            max_val: float,
+        }, // end of constrain1 dict
+        constrain2 name: {...}
+    } // end of constrains dict
+} // end of the BuildSession dict
+```
+
+## project_classes.py file
+Gathers all project's classes.
+
+The 'SessionBuild' class is for the building sessions part, gets the BuildSession.json file and creates the class.
+
+**functions explanations marks are inside the file.**
+
 
 ## new_data_update.py file
 Updating the stats.json and families.json files when reciving new data csv file.
