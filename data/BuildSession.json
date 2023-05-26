@@ -4,17 +4,17 @@
         "fams": ["RONDO", "SSG","SSG"],
         "parameter": "Distance per Minute (alt.)",
         "min_val": 149,
-        "max_val": 150,
+        "max_val": 150
     },
     "constrains":
     {
         "constrain1":
         {
             "fams": ["RONDO"],
-            "parameter": "Distan per Minute (alt.)",
+            "parameter": "Distance per Minute (alt.)",
             "operator": "range",
             "min_val": 40,
-            "max_val": 62,
+            "max_val": 62
         }
     }
 }
