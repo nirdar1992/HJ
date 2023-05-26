@@ -200,31 +200,3 @@ def build_session(sb):
                     option_num -= 1
     pprint.pprint(session_options)
     return session_options
-
-
-build_session(SessionBuild())
-
-
-'''
-V להוזיף גם שונות משותפת בהדפסה של כל האימון
-
-לתקן את ההדפסות שיהיה קריא V
-
-הסטיית תקן שתהיה RANGE שזה יהיה גם פרמטר שהפונקציה מקבלת V
-
-מה הסהסתברות שנחרוג מהערכים האלה? להניח התפלגולת נורמלית ולחשב V
-
-רוצים גם לבחור את הפרמטר שלפיו נעבוד V
-
-שהקוד יקבל גם התניות, נניח שהטופס ספיד לא יעלה על ערך מסויים בתרגיל מסויים V
-
-יש באג במציאת זוגות - לדבאג V
-
-בדיקות ארגומנטים והקפצת שגיאות V
-
-תיקון הערות בפונקציות V
-
-לכתוב את הדוח אמצע ולתת לאורין שישלים
-
-add explanation for data constraines in functions and in functions parameters and in git
-'''
