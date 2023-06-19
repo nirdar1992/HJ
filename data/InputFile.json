@@ -1,0 +1,17 @@
+    
+    
+    
+    
+    {
+      "operation": "build training session",
+      "drills" : "",
+      "parameter": "",
+      "stats_file": "",
+      "families_file": "C:\\Users\\nird\\PycharmProjects\\HJ\\data\\families.json",
+      "output_folder": "/data/out",
+      "build_session_file": "C:\\Users\\nird\\PycharmProjects\\HJ\\data\\BuildSession.json",
+      "new_data_file": ""
+    }
+
+
+
