@@ -47,14 +47,13 @@ def extract_family_name(drill_name):
         return first_word
 
 
-def map_drill_fam(drill):
+def map_drill_fam(families_file, drill):
     '''
     finds drill's family group
     :param drill: drill's name
     :return: drill's family name
     '''
     # load families json file
-    families_file = "../data/families.json"
     families = open_json_file(families_file)
     # iterate over each family until found
     for fam in families:

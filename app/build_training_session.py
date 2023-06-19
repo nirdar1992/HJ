@@ -1,17 +1,13 @@
 import pprint
-from helper_functions import *
-from project_classes import SessionBuild
+from app.helper_functions import *
+from app.project_classes import SessionBuild
 from scipy.stats import norm
 
 # define the precent we would consider to exceed from our distance target value
 SD_MEAN = 0.2
-# load families dict
-global families
-families_file = "../data/families.json"
-families = open_json_file(families_file)
 
 
-def rec_sum(drills, val, fam_name, parameter, sd, sub_drills=[]):
+def rec_sum(families, drills, val, fam_name, parameter, sd, sub_drills=[]):
     '''
     helper recursive function which finds a drill/s or drills combinations that sums up to a specific drill
     :param drills: list of family related drills names
@@ -30,7 +26,7 @@ def rec_sum(drills, val, fam_name, parameter, sd, sub_drills=[]):
         return []
     else:
         # subtract the new drill parameter value from our target value
-        find_parameter(parameter, families[fam_name][drills][0])
+        find_parameter(parameter, families[fam_name][drills[0]])
         temp_val = val - families[fam_name][drills[0]]["parameters"][parameter]["team's mean"]
         # remove the drill from our family drills because we've just iterated over it
         temp_drills = [drill for drill in drills]
@@ -40,42 +36,44 @@ def rec_sum(drills, val, fam_name, parameter, sd, sub_drills=[]):
         new_sbd = [drill for drill in sub_drills]
         new_sbd.append(d)
         # call the function recursively, once without taking the last drill in consider and once with it
-        return rec_sum(temp_drills, val, fam_name, parameter, sd, sub_drills), rec_sum(temp_drills, temp_val, fam_name, parameter, sd, new_sbd)
+        return rec_sum(families, temp_drills, val, fam_name, parameter, sd, sub_drills), rec_sum(families, temp_drills, temp_val, fam_name, parameter, sd, new_sbd)
 
 
-def find_equal_drill(drill_name, parameter="Distance per Minute (alt.)"):
+def find_equal_drill(families_file, drill_name, parameter="Distance per Minute (alt.)"):
     '''
     function which finds a drill/s or drills combinations that sums up to a specific drill parameter value
     :param drill_name: drill's name we would like to replace
     :param parameter: parameter's name we search by
     :return: list of lists of drills combinations that could replace the target drill
     '''
+    families = open_json_file(families_file)
     # find drill's family name
-    fam_name = map_drill_fam(drill_name)
+    fam_name = map_drill_fam(families_file, drill_name)
     # extract the target value
-    find_parameter(families[fam_name][drill_name])
+    find_parameter(parameter, families[fam_name][drill_name])
     mean_to_reach = families[fam_name][drill_name]["parameters"][parameter]["team's mean"]
     # create list of the drills names from the same family and remove the drill we want to replace
     fam_drills = list(families[fam_name].keys())
     fam_drills.remove(drill_name)
     # call the "rec_sum" function and find our drills, print/return it
-    result = rec_sum(fam_drills, mean_to_reach, fam_name, parameter, mean_to_reach*SD_MEAN)
+    result = rec_sum(families, fam_drills, mean_to_reach, fam_name, parameter, mean_to_reach*SD_MEAN)
     pprint.pprint(result)
     return result
 
 
-def get_session_val(parameter="Distance per Minute (alt.)", *drills):
+def get_session_val(families_file, drills, parameter="Distance per Minute (alt.)"):
     '''
     :param drills: unlimited drills names that represents a training session
     :param parameter: by which parameter to sum the session. Distance param by default.
     :return: dictionary which contains the training session's parameter by drill and the total sum of it
     '''
+    families = open_json_file(families_file)
     total_dist = 0
     session_dict = {parameter: 0, "session's drills": {}}
     # iterate over each drill in the input
     for drill in drills:
         # find drill's family name
-        drill_fam = map_drill_fam(drill)
+        drill_fam = map_drill_fam(families_file, drill)
         # copy drill's parameter values to the training session dict
         session_dict["session's drills"][drill] = families[drill_fam][drill]["parameters"]
         # update the total training session "Distance per Minute (alt.)" parameter
@@ -86,7 +84,7 @@ def get_session_val(parameter="Distance per Minute (alt.)", *drills):
     return session_dict
 
 
-def build_drills_combination(fam1, fam2, parameter):
+def build_drills_combination(families, fam1, fam2, parameter):
     '''
     helper function to the "build_session" function - find all unite drills combinations by families
     :param fam1: family name as a string
@@ -128,12 +126,13 @@ def build_drills_combination(fam1, fam2, parameter):
     return combinations
 
 
-def build_session(sb):
+def build_session(families_file, sb):
     '''
     builds a training session by a distance value training and specific families of drills
     :param sb: sessions build params as a SessionBuild class
     :return: dictionary of training session options - total sum of the session and of each drill
     '''
+    families = open_json_file(families_file)
     drill_fams, parameter, low_val, high_val = sb.get_session_params()
     combos = list()
     session_options = dict()
@@ -141,10 +140,10 @@ def build_session(sb):
     for drill_index in range(len(drill_fams) - 1):
         # if first iteration - the func should get two strings as an input
         if drill_index == 0:
-            combos = build_drills_combination(drill_fams[drill_index], drill_fams[drill_index + 1], parameter)
+            combos = build_drills_combination(families, drill_fams[drill_index], drill_fams[drill_index + 1], parameter)
         # we used the second drill in the first iteration
         elif drill_index != 1:
-            combos = build_drills_combination(drill_fams[drill_index], combos, parameter)
+            combos = build_drills_combination(families, drill_fams[drill_index], combos, parameter)
     # sort all combinations by the total distance value - from the highest to lowest
     combos.sort(key=lambda combo_lam: combo_lam[-1], reverse=True)
     # get the session's last family data
@@ -174,13 +173,13 @@ def build_session(sb):
                 session_title = "session option number " + option_num_str
                 option_num += 1
                 session_options[session_title] = {"drills": {}}
-                session_options[session_title]["drills"][drill] = families[map_drill_fam(drill)].get(drill)
-                total_variance = families[map_drill_fam(drill)][drill]['parameters'][parameter].get("team's variance")
+                session_options[session_title]["drills"][drill] = families[map_drill_fam(families_file, drill)].get(drill)
+                total_variance = families[map_drill_fam(families_file, drill)][drill]['parameters'][parameter].get("team's variance")
                 for dr in combo:
                     if not tuple == type(dr):
                         break
-                    session_options[session_title]["drills"][dr[0]] = families[map_drill_fam(dr[0])].get(dr[0])
-                    total_variance += families[map_drill_fam(dr[0])][dr[0]]['parameters'][parameter].get("team's variance")
+                    session_options[session_title]["drills"][dr[0]] = families[map_drill_fam(families_file, dr[0])].get(dr[0])
+                    total_variance += families[map_drill_fam(families_file, dr[0])][dr[0]]['parameters'][parameter].get("team's variance")
                 session_options[session_title]["total mean"] = round(total_mean, 3)
                 session_options[session_title]["total variance"] = round(total_variance, 3)
                 # calculate low dan high val probabilities
@@ -200,3 +199,36 @@ def build_session(sb):
                     option_num -= 1
     pprint.pprint(session_options)
     return session_options
+
+
+'''
+V להוזיף גם שונות משותפת בהדפסה של כל האימון
+
+לתקן את ההדפסות שיהיה קריא V
+
+הסטיית תקן שתהיה RANGE שזה יהיה גם פרמטר שהפונקציה מקבלת V
+
+מה הסהסתברות שנחרוג מהערכים האלה? להניח התפלגולת נורמלית ולחשב V
+
+רוצים גם לבחור את הפרמטר שלפיו נעבוד V
+
+שהקוד יקבל גם התניות, נניח שהטופס ספיד לא יעלה על ערך מסויים בתרגיל מסויים V
+
+יש באג במציאת זוגות - לדבאג V
+
+בדיקות ארגומנטים והקפצת שגיאות V
+
+תיקון הערות בפונקציות V
+
+
+
+באג בחישוב שונות למצוא ------------ הערכים קופצים יותר מדי - איך למתן?
+אם יש שתי משפחולת דומות אז שההתנייה תהיה סםציפית לחלק אחד ושלא יחול על שניהם V
+
+להגדיר טסטים לאפליקציה - אחד מהטסטים צריך להיות: לקחת יום מאמצע שבוע לא לפני ולא אחרי משחק, בודקים איך היום מתפלג, כלומר מה סדר התרגילים, מה הםרמטרים לכל תרגיל ומה הםרמטר לכל היום [שחקן וקבוצה] ואז להציע אימון אחר - ולכתוב באיזה תרגלים אפשר להחליף חלק מהתרגילים באימון המקורי, סעיף ב מה האופיצות לאימונים מאותם המשפחות של האימון המקורי וסעיף שלישי הצעות לאימון שיגיעו לפרמטרים דומים בלי הגבלות על סוג משפחה. כל התהליך הזה כפול 3
+
+
+לכתוב את הדוח אמצע ולתת לאורין שישלים
+
+V add explanation for data constrains in functions and in functions parameters and in git
+'''

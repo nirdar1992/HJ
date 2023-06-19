@@ -1,14 +1,11 @@
-from helper_functions import *
-
-global families
-families_file = "../data/families.json"
-families = open_json_file(families_file)
+from app.helper_functions import *
+families_file = "./data/families.json"
 
 
 class SessionBuild:
     def __init__(self, session_dict_path="../data/BuildSession.json"):
         '''
-        :param session_dict_path: path to the desired session json file, "../data/BuildSession.json" by default
+        :param session_dict_path: path to the desired session json file, "data/BuildSession.json" by default
         '''
         self.session_dict = open_json_file(session_dict_path)
         self.session_fams = self.session_dict["session"].get("fams")
@@ -28,17 +25,21 @@ class SessionBuild:
         if type(self.session_fams) != list:
             raise ValueError("Session's families input should be a list of families.")
         for fam in self.session_fams:
+            families = open_json_file(families_file)
             if fam not in families:
                 raise ValueError(fam + " is not in families json file, Please check your spelling.")
         if self.parameter not in self.valid_parameters:
             raise ValueError(self.parameter + " is not a valid parameter, please check your spelling.")
         if self.min_val < 0 or self.max_val < 0:
             raise ValueError("Minimum/Maximum value can not be negative.")
+        if self.min_val > self.max_val:
+            raise ValueError("Minimum val can not be greater than maximum val.")
 
     def check_constrain_params(self):
         '''
         :return: runs at initialization, checks the validation of the constrains parameters
         '''
+        families = open_json_file(families_file)
         for con in self.constrains_dict:
             if type(self.constrains_dict[con]['fams']) != list:
                 raise ValueError("In " + con + ": families input should be a list of families.")
@@ -51,6 +52,8 @@ class SessionBuild:
                 raise ValueError("In " + con + ": operator must be 'range' or 'sum range'.")
             if self.constrains_dict[con]['min_val'] < 0 or self.constrains_dict[con]['max_val'] < 0:
                 raise ValueError("In " + con + ": minimum/maximum value can not be negative.")
+            if self.constrains_dict[con]['min_val'] > self.constrains_dict[con]['max_val']:
+                raise ValueError("In " + con + ": minimum val can not be greater than maximum val.")
 
     def get_session_params(self):
         '''
@@ -71,14 +74,17 @@ class SessionBuild:
             parameter = self.constrains_dict[con]['parameter']
             min_val = self.constrains_dict[con]['min_val']
             max_val = self.constrains_dict[con]['max_val']
+            fam_summed = []  # ensures constrain activated on family once
             for drill in drills_dict:
-                if not map_drill_fam(drill) in cons_fams:
+                fam_name = map_drill_fam(families_file, drill)
+                if (fam_name not in cons_fams) or fam_name in fam_summed:
                     continue
                 if operator == 'range':
                     if not min_val <= drills_dict[drill]["parameters"][parameter]["team's mean"] <= max_val:
                         return False
                 else:  # sum range and check it at the end
                     total_sum += drills_dict[drill]["parameters"][parameter]["team's mean"]
+                    fam_summed.append(fam_name)
             if operator == 'sum range' and not min_val <= total_sum <= max_val:
                 return False
         return True
