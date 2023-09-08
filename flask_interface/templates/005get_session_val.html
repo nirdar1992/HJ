@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HJLM - get session val</title>
+</head>
+<body>
+    <div class="center-container">
+    <h1>Get Session's Values</h1>
+    {% include '000base_page.html' %}
+    <div class="box">
+        <form id="categoryForm" method="POST">
+        <h3 for="parameter">Select a parameter</h3>
+        <select id="parameter" name="parameter">
+                <option value="Total Distance">Total Distance</option>
+                <option value="Distance Zone 4 (Absolute)">Distance Zone 4 (Absolute)</option>
+                <option value="Distance Zone 5 (Absolute)">Distance Zone 5 (Absolute)</option>
+                <option value="Distance Zone 6 (Absolute)">Distance Zone 6 (Absolute)</option>
+                <option value="HSR Per Minute (Absolute)">HSR Per Minute (Absolute)</option>
+                <option value="Sprint Distance">Sprint Distance</option>
+                <option value="Accelerations Per Min">Accelerations Per Min</option>
+                <option value="Decelerations Per Min">Decelerations Per Min</option>
+                <option value="Max Speed">Max Speed</option>
+                <option value="Distance Per Min">Distance Per Min</option>
+                <option value="Accelerations">Accelerations</option>
+                <option value="Decelerations">Decelerations</option>
+                <option value="HML Distance">HML Distance</option>
+                <option value="HMLD Per Minute">HMLD Per Minute</option>
+            </select><br><br>
+        <div id="selectContainer">
+            <h3 for="firstSelect">select drills</h3>
+            <select id="firstSelect">
+                <option value="None" selected>None</option>
+                {% for family, drills in drills_data.items() %}
+            <optgroup label="{{ family }}">
+                {% for drill in drills %}
+                <option value="{{ drill }}">{{ drill }}</option>
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+            </select>
+        </div>
+        <br>
+        <center>
+        <button id="first" type="submit">Go!</button>
+        </center>
+
+    </form>
+
+    <script>
+    // Get references to the form and select elements
+    const categoryForm = document.getElementById('categoryForm');
+    const selectContainer = document.getElementById('selectContainer');
+    const submitButton = document.querySelector('input[type="submit"]');
+    const userChoicesInput = document.getElementById('userChoices');
+
+    // User choices array to store selections
+    const userChoices = [];
+
+    // Counter for generating unique names
+    let selectCounter = 1;
+
+    // Event listener to handle changes in the selects
+    selectContainer.addEventListener('change', function(event) {
+        const select = event.target;
+
+        if (select.value === 'none') {
+            // If the selected option is 'none', remove this select and clear its value
+            selectContainer.removeChild(select);
+            userChoices.pop(); // Remove the last choice
+        } else {
+            userChoices.push(select.value); // Store the choice
+
+            // Create a new select element
+            const newSelect = document.createElement('select');
+            newSelect.name = `category_${selectCounter++}`; // Assign a unique name
+            selectContainer.appendChild(newSelect);
+
+            // Add a line break for spacing
+            selectContainer.appendChild(document.createElement('br'));
+
+            // Show the new select element
+            newSelect.style.display = 'block';
+
+            const optionElement = document.createElement('option');
+            optionElement.value = 'None';
+            optionElement.textContent = 'None';
+            newSelect.appendChild(optionElement);
+
+            // Create optgroups in the new select based on the original optgroups
+            const optgroupLabels = document.querySelectorAll('optgroup[label]');
+            optgroupLabels.forEach(function(optgroupLabel) {
+                const newOptgroup = document.createElement('optgroup');
+                newOptgroup.label = optgroupLabel.label;
+                newSelect.appendChild(newOptgroup);
+
+                // Populate the new optgroup with options from the same group
+                const optionsInGroup = Array.from(optgroupLabel.querySelectorAll('option'));
+                optionsInGroup.forEach(function(option) {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.value;
+                    optionElement.textContent = option.textContent;
+                    newOptgroup.appendChild(optionElement);
+                });
+            });
+        }
+
+        // Show or hide the submit button based on the number of selects
+        const remainingSelects = selectContainer.querySelectorAll('select').length;
+        submitButton.style.display = remainingSelects > 1 ? 'block' : 'none';
+
+        // Update the hidden input field with user choices
+        userChoicesInput.value = userChoices.join(',');
+    });
+
+    // Event listener for form submission
+    categoryForm.addEventListener('submit', function(event) {
+        // For testing purposes, print userChoices
+        console.log('User Choices:', userChoices);
+    });
+    </script>
+
+        </div>
+        <br><br><br><br>
+        <hr>
+        <navbar>
+        <a class="nav-link" href="/" style="font-size: 14px;">Home Page</a>
+        <a class="nav-link" href="/logout" style="font-size: 14px;">Logout From {{ current_user.id }}</a>
+        </navbar>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

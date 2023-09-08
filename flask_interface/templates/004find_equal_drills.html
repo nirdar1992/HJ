@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HJLM - find equal drill</title>
+</head>
+<body>
+    <div class="center-container">
+        <h1>Find Similar Drills</h1>
+        {% include '000base_page.html' %}
+        <div class="box">
+        <form method="POST" enctype="multipart/form-data">
+            <h3 for="drill">Select a drill</h3>
+            <select id="drill" name="drill">
+            {% for family, drills in drills_data.items() %}
+            <optgroup label="{{ family }}">
+                {% for drill in drills %}
+                <option value="{{ drill }}">{{ drill }}</option>
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+            </select>
+            <br><br>
+            <h3 for="parameter">Select a parameter</h3>
+            <select id="parameter" name="parameter">
+                <option value="Total Distance">Total Distance</option>
+                <option value="Distance Zone 4 (Absolute)">Distance Zone 4 (Absolute)</option>
+                <option value="Distance Zone 5 (Absolute)">Distance Zone 5 (Absolute)</option>
+                <option value="Distance Zone 6 (Absolute)">Distance Zone 6 (Absolute)</option>
+                <option value="HSR Per Minute (Absolute)">HSR Per Minute (Absolute)</option>
+                <option value="Sprint Distance">Sprint Distance</option>
+                <option value="Accelerations Per Min">Accelerations Per Min</option>
+                <option value="Decelerations Per Min">Decelerations Per Min</option>
+                <option value="Max Speed">Max Speed</option>
+                <option value="Distance Per Min">Distance Per Min</option>
+                <option value="Accelerations">Accelerations</option>
+                <option value="Decelerations">Decelerations</option>
+                <option value="HML Distance">HML Distance</option>
+                <option value="HMLD Per Minute">HMLD Per Minute</option>
+            </select>
+            <br><br>
+            <input type="text" name="deviation" placeholder="deviation"><br><br>
+            <br><br>
+            <button id="first" type="submit">Find</button>
+        </form>
+        </div>
+        <br><br>
+        <hr>
+        <navbar>
+        <a class="nav-link" href="/" style="font-size: 14px;">Home Page</a>
+        <a class="nav-link" href="/logout" style="font-size: 14px;">Logout From {{ current_user.id }}</a>
+        </navbar>
+    </div>
+</body>
+</html>

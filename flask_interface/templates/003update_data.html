@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HJLM - Update Data</title>
+</head>
+<body>
+<div class="center-container">
+  <h1>Update Data</h1>
+  {% include '000base_page.html' %}
+  <div class="box">
+    <form method="POST" enctype="multipart/form-data">
+        <h3>upload new data file</h3>
+        <input type="file" id="csv_file" name="csv_file" accept=".csv"><br><br>
+        <br>
+        <button id="first" type="submit">Update</button>
+    </form>
+  </div>
+    <br><br><br><br><br><br><br><br>
+    <hr>
+        <navbar>
+        <a class="nav-link" href="/" style="font-size: 14px;">Home Page</a>
+        <a class="nav-link" href="/logout" style="font-size: 14px;">Logout From {{ current_user.id }}</a>
+        </navbar>
+</div>
+
+</body>
+</html>

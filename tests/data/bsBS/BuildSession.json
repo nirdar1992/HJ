@@ -1,0 +1,23 @@
+{
+    "session":
+    {
+        "fams": ["rondo", "lsg"],
+        "parameter": "Total Distance",
+        "min_val": 400,
+        "max_val": 510
+    },
+    "constrains":
+    {
+        "constrain1":
+        {
+            "fams": ["rondo"],
+            "parameter": "Total Distance",
+            "operator": "range",
+            "min_val": 200,
+            "max_val": 210
+        }
+    }
+}
+      
+      
+      

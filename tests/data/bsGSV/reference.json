@@ -1,0 +1,179 @@
+{
+"Total Distance": 1843.3899999999999,
+"session's drills": {
+"Tactical Defense & Offence": {
+"Total Distance": {
+"team's mean": 1520.37,
+"team's variance": 37045.81
+},
+"Distance Zone 4 (Absolute)": {
+"team's mean": 229.05,
+"team's variance": 6716.26
+},
+"Distance Zone 5 (Absolute)": {
+"team's mean": 86.47,
+"team's variance": 1528.46
+},
+"Distance Zone 6 (Absolute)": {
+"team's mean": 21.21,
+"team's variance": 429.85
+},
+"HSR Per Minute (Absolute)": {
+"team's mean": 5.9,
+"team's variance": 6.77
+},
+"Sprint Distance": {
+"team's mean": 126.42,
+"team's variance": 3043.51
+},
+"Accelerations Per Min": {
+"team's mean": 0.58,
+"team's variance": 0.05
+},
+"Decelerations Per Min": {
+"team's mean": 0.53,
+"team's variance": 0.03
+},
+"Max Speed": {
+"team's mean": 28.31,
+"team's variance": 4.76
+},
+"Distance Per Min": {
+"team's mean": 83.26,
+"team's variance": 111.14
+},
+"Accelerations": {
+"team's mean": 10.68,
+"team's variance": 15.48
+},
+"Decelerations": {
+"team's mean": 9.68,
+"team's variance": 11.48
+},
+"HMLD Per Minute": {
+"team's mean": 15.42,
+"team's variance": 15.79
+},
+"HML Distance": {
+"team's mean": 281.42,
+"team's variance": 5266.77
+}
+},
+"SSG 6vs6+12F": {
+"Total Distance": {
+"team's mean": 101.94,
+"team's variance": 7089.52
+},
+"Distance Zone 4 (Absolute)": {
+"team's mean": 12.71,
+"team's variance": 244.88
+},
+"Distance Zone 5 (Absolute)": {
+"team's mean": 1.19,
+"team's variance": 10.33
+},
+"Distance Zone 6 (Absolute)": {
+"team's mean": 0.02,
+"team's variance": 0.03
+},
+"HSR Per Minute (Absolute)": {
+"team's mean": 0.75,
+"team's variance": 4.32
+},
+"Sprint Distance": {
+"team's mean": 1.2,
+"team's variance": 13.02
+},
+"Accelerations Per Min": {
+"team's mean": 1.21,
+"team's variance": 1.93
+},
+"Decelerations Per Min": {
+"team's mean": 1.12,
+"team's variance": 1.86
+},
+"Max Speed": {
+"team's mean": 13.7,
+"team's variance": 46.67
+},
+"Distance Per Min": {
+"team's mean": 65.29,
+"team's variance": 2884.93
+},
+"Accelerations": {
+"team's mean": 1.89,
+"team's variance": 4.67
+},
+"Decelerations": {
+"team's mean": 1.75,
+"team's variance": 4.51
+},
+"HMLD Per Minute": {
+"team's mean": 14.03,
+"team's variance": 226.49
+},
+"HML Distance": {
+"team's mean": 21.9,
+"team's variance": 557.67
+}
+},
+"Split: Offense, Finishing Competition": {
+"Total Distance": {
+"team's mean": 221.08,
+"team's variance": 5862.04
+},
+"Distance Zone 4 (Absolute)": {
+"team's mean": 24.14,
+"team's variance": 200.15
+},
+"Distance Zone 5 (Absolute)": {
+"team's mean": 7.56,
+"team's variance": 58.46
+},
+"Distance Zone 6 (Absolute)": {
+"team's mean": 0.81,
+"team's variance": 8.5
+},
+"HSR Per Minute (Absolute)": {
+"team's mean": 1.91,
+"team's variance": 4.5
+},
+"Sprint Distance": {
+"team's mean": 9.08,
+"team's variance": 111.29
+},
+"Accelerations Per Min": {
+"team's mean": 0.71,
+"team's variance": 0.13
+},
+"Decelerations Per Min": {
+"team's mean": 0.29,
+"team's variance": 0.09
+},
+"Max Speed": {
+"team's mean": 22.17,
+"team's variance": 9.22
+},
+"Distance Per Min": {
+"team's mean": 51.04,
+"team's variance": 312.4
+},
+"Accelerations": {
+"team's mean": 3.06,
+"team's variance": 2.37
+},
+"Decelerations": {
+"team's mean": 1.23,
+"team's variance": 1.62
+},
+"HMLD Per Minute": {
+"team's mean": 7.55,
+"team's variance": 12.38
+},
+"HML Distance": {
+"team's mean": 32.72,
+"team's variance": 235.76
+}
+}
+}
+}

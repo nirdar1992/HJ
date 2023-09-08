@@ -1,0 +1,131 @@
+{
+"session option number 001": {
+"drills": {
+"Rondo 12vs3 (12*12m": {
+"parameters": {
+"Total Distance": {
+"team's mean": 205.52,
+"team's variance": 12381.34
+},
+"Distance Zone 4 (Absolute)": {
+"team's mean": 30.19,
+"team's variance": 655.49
+},
+"Distance Zone 5 (Absolute)": {
+"team's mean": 11.17,
+"team's variance": 136.52
+},
+"Distance Zone 6 (Absolute)": {
+"team's mean": 0.0,
+"team's variance": 0.0
+},
+"HSR Per Minute (Absolute)": {
+"team's mean": 3.6,
+"team's variance": 11.96
+},
+"Sprint Distance": {
+"team's mean": 11.62,
+"team's variance": 154.52
+},
+"Accelerations Per Min": {
+"team's mean": 1.38,
+"team's variance": 0.84
+},
+"Decelerations Per Min": {
+"team's mean": 1.25,
+"team's variance": 1.04
+},
+"Max Speed": {
+"team's mean": 19.91,
+"team's variance": 30.28
+},
+"Distance Per Min": {
+"team's mean": 64.73,
+"team's variance": 525.89
+},
+"Accelerations": {
+"team's mean": 4.79,
+"team's variance": 15.84
+},
+"Decelerations": {
+"team's mean": 4.26,
+"team's variance": 17.0
+},
+"HMLD Per Minute": {
+"team's mean": 14.63,
+"team's variance": 90.39
+},
+"HML Distance": {
+"team's mean": 48.07,
+"team's variance": 1510.16
+}
+}
+},
+"LSG 9vs9 (42*60m)": {
+"parameters": {
+"Total Distance": {
+"team's mean": 288.22,
+"team's variance": 1697.84
+},
+"Distance Zone 4 (Absolute)": {
+"team's mean": 39.57,
+"team's variance": 393.54
+},
+"Distance Zone 5 (Absolute)": {
+"team's mean": 12.82,
+"team's variance": 135.48
+},
+"Distance Zone 6 (Absolute)": {
+"team's mean": 2.4,
+"team's variance": 37.38
+},
+"HSR Per Minute (Absolute)": {
+"team's mean": 5.91,
+"team's variance": 32.55
+},
+"Sprint Distance": {
+"team's mean": 17.07,
+"team's variance": 280.11
+},
+"Accelerations Per Min": {
+"team's mean": 1.19,
+"team's variance": 0.42
+},
+"Decelerations Per Min": {
+"team's mean": 1.01,
+"team's variance": 0.38
+},
+"Max Speed": {
+"team's mean": 23.24,
+"team's variance": 12.24
+},
+"Distance Per Min": {
+"team's mean": 112.18,
+"team's variance": 237.65
+},
+"Accelerations": {
+"team's mean": 3.07,
+"team's variance": 2.82
+},
+"Decelerations": {
+"team's mean": 2.6,
+"team's variance": 2.49
+},
+"HMLD Per Minute": {
+"team's mean": 22.5,
+"team's variance": 59.26
+},
+"HML Distance": {
+"team's mean": 57.9,
+"team's variance": 402.61
+}
+}
+}
+},
+"exceeded limit probabilities": [
+0.215,
+0.446
+], "total mean": 493.74,
+"total variance": 14079.18
+}
+}
