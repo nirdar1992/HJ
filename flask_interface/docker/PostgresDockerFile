@@ -1,7 +1,0 @@
-FROM postgres:latest
-USER root
-RUN apt update
-RUN groupadd -g 902 vbu
-RUN useradd -s /bin/bash -u 10441 -g 902 ailabsbuilduser
-RUN usermod -aG postgres ailabsbuilduser
-USER ailabsbuilduser
