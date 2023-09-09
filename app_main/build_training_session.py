@@ -1,4 +1,3 @@
-import pprint
 from app_main.helper_functions import *
 from app_main.project_classes import SessionBuild
 from scipy.stats import norm
@@ -69,11 +68,6 @@ def find_equal_drill(
     result = rec_sum(
         families, fam_drills, mean_to_reach, fam_name, parameter, mean_to_reach * sd
     )
-    print("len", len(result))
-    print("type", type(result))
-    for i in result:
-        print(i)
-        print("\n\n\n\n")
     return result
 
 
@@ -101,7 +95,6 @@ def get_session_val(
         find_parameter(parameter, families[drill_fam][drill])
         total_dist += families[drill_fam][drill]["parameters"][parameter]["team's mean"]
     session_dict[parameter] = total_dist
-    pprint.pprint(session_dict)
     return session_dict
 
 
@@ -252,5 +245,4 @@ def build_session(sb, families_file="../data/families.json"):
                     # constrains did not meet with the training session option
                     del session_options[session_title]
                     option_num -= 1
-    pprint.pprint(session_options)
     return session_options
