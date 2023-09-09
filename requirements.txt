@@ -1,0 +1,8 @@
+numpy
+pandas
+scipy
+flask
+flask_login
+inspect
+logging
+gunicorn
