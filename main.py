@@ -29,7 +29,7 @@ if __name__ == "__main__":
         completed_process = subprocess.run(
             [
                 "python",
-                "C:\\Users\\nird\\PycharmProjects\\HJ/tests/test_build_session.py",
+                "tests/test_main.py",
             ],
             capture_output=True,
             text=True,
