@@ -37,19 +37,19 @@ def convert_path(windows_path: str) -> str:
 
 # prompts messages - should be replaced with a better solution
 def show_message(message: str) -> None:
-    '''
+    """
     sends the message to current html file
-    '''
+    """
     handle_log_and_error("info", f"user got the following message: {message}")
     flash(message, "info")
 
 
 def make_drills_list(families_path: str = "../data/families.json") -> dict:
-    '''
+    """
     strips onnx and tensor flow file names (if exist)
     :param families_path: path to families file
     :return: dict of family names and their drills
-    '''
+    """
     try:
         families = open_json_file(families_path)
         drills = dict()
@@ -62,23 +62,27 @@ def make_drills_list(families_path: str = "../data/families.json") -> dict:
 
 
 def write_and_send_file(file_path: str, data: list or dict, redirect_to: str) -> None:
-    '''
+    """
     :param file_path: file's path to write and download
     :param data: data to write
     :param redirect_to: page to redirect in an error situation
     :return: None, starts file downloading
-    '''
+    """
     try:
         write_to_json_file(file_path, data)
         handle_log_and_error("info", "wrote to json file")
         response = make_response(send_file(file_path, as_attachment=True))
-        response.headers["Content-Disposition"] = f"attachment; filename={os.path.basename(file_path)}"
+        response.headers[
+            "Content-Disposition"
+        ] = f"attachment; filename={os.path.basename(file_path)}"
         handle_log_and_error("info", "sent json file")
         return response
     except Exception as error_message:
         if os.path.exists(file_path):
             os.remove(file_path)
         show_message("Could not send file")
-        handle_log_and_error("error",
-                             f"catched an ERROR: {error_message} while trying to write and send the file")
+        handle_log_and_error(
+            "error",
+            f"catched an ERROR: {error_message} while trying to write and send the file",
+        )
         return redirect(url_for(redirect_to))

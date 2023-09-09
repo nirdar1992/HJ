@@ -7,6 +7,7 @@ from flask_login import current_user, AnonymousUserMixin
 
 CURRENT_TIME = str(datetime.now().strftime("%d%m%Y"))
 
+
 def handle_log_and_error(log_type: str, message: str) -> None:
     """
     Handling all types of logging events by log_type, raising error if occurred.
@@ -19,7 +20,11 @@ def handle_log_and_error(log_type: str, message: str) -> None:
         function_name = frame.function
         line_number = frame.lineno
         filename = os.path.basename(frame.filename)
-        if 'login.py' == filename or current_user == None or isinstance(current_user, AnonymousUserMixin):
+        if (
+            "login.py" == filename
+            or current_user == None
+            or isinstance(current_user, AnonymousUserMixin)
+        ):
             username = "SYSTEM"
         else:
             username = current_user.id
@@ -67,10 +72,12 @@ def init_logging() -> None:
     """ּ
     Initializing logger file by date & time naming.ּּ
     """
+
     class PWFormatter(logging.Formatter):
         """
         Overriding the logging format.
         """
+
         def format(self, record):
             extra_dict = {}
             fmt = (
@@ -92,7 +99,7 @@ def init_logging() -> None:
         if isinstance(handler, logging.StreamHandler):
             log.removeHandler(handler)
     log.setLevel(logging.DEBUG)
-    logger_file_name = r'C:\Users\nird\PycharmProjects\HJ\flask_interface\logs\HJ_log_{CURRENT_TIME}.txt'
+    logger_file_name = r"C:\Users\nird\PycharmProjects\HJ\flask_interface\logs\HJ_log_{CURRENT_TIME}.txt"
     file_handler = logging.FileHandler(filename=logger_file_name)
     file_handler.setFormatter(PWFormatter())
     log.addHandler(file_handler)

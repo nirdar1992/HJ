@@ -8,10 +8,12 @@ from flask_interface.app.utilities.logger import handle_log_and_error
 login_manager = LoginManager(app)
 handle_log_and_error("info", "LoginManager instantiated")
 
+
 class User(UserMixin):
-    '''
+    """
     user class, in order to handle flask login method
-    '''
+    """
+
     def __init__(self, user_id):
         self.id = user_id
         handle_log_and_error("info", "User instantiated")
@@ -19,9 +21,9 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id: str) -> User:
-    '''
+    """
     simple function, in use in the flask login method
-    '''
+    """
     handle_log_and_error("info", "function executed successfully")
     return User(user_id)
 
@@ -46,7 +48,9 @@ def validate_login(request: Request) -> bool:
             handle_log_and_error("info", f"{username} has logged-in successfully")
             return True
         # password is incorrect
-        handle_log_and_error("info", f"{username} has enterd wrong password: {password_enterd}")
+        handle_log_and_error(
+            "info", f"{username} has enterd wrong password: {password_enterd}"
+        )
         return False
     except Exception:
         # username is incorrect
