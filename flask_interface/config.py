@@ -2,10 +2,6 @@
 
 SECRET_KEY = "HJ"
 FLASK_FOLDER = r"C:\Users\nird\PycharmProjects\HJ"
-DATABASE_NAME = "ModelZoo"
-DATABASE_USER = "postgres"
-DATABASE_HOST = "localhost"
-DATABASE_PASSWORD = "Welcome4$"
 USERS = {"nird": "3012"}
 
 # gunicorn configs
