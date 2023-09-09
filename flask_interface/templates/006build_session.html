@@ -37,7 +37,6 @@
             <br><br>
 
         <div id="selectContainer">
-
             <h3 for="firstSelect">select drills families</h3>
             <select id="firstSelect">
                 <option value="None" selected>None</option>
@@ -47,74 +46,71 @@
             </select>
         </div>
         <br>
- <input type="hidden" id="userChoices" name="userChoices">
-
-    <script>
-
-
- // Get references to the form and select elements
-const categoryForm = document.getElementById('categoryForm');
-const selectContainer = document.getElementById('selectContainer');
-const submitButton = document.querySelector('input[type="submit"]');
-const userChoicesInput = document.getElementById('userChoices');
-
-// User choices array to store selections
-const userChoices = [];
-
-// Counter for generating unique names
-let selectCounter = 1;
-
-
-// Event listener to handle changes in the selects
-selectContainer.addEventListener('change', function(event) {
-    const select = event.target;
-    // Inside your selectContainer event listener
-// Update the hidden input field with user choices
-userChoicesInput.value = userChoices.join(',');
-    if (select.value === 'none') {
-        // If the selected option is 'none', remove this select and clear its value
-        selectContainer.removeChild(select);
-        userChoices.pop(); // Remove the last choice
-    } else {
-        userChoices.push(select.value); // Store the choice
-
-        // Create a new select element
-        const newSelect = document.createElement('select');
-        newSelect.name = `category_${selectCounter++}`; // Assign a unique name
-        selectContainer.appendChild(newSelect);
-
-        // Add a line break for spacing
-        selectContainer.appendChild(document.createElement('br'));
-
-        // Show the new select element
-        newSelect.style.display = 'block';
-
-        // Populate the new optgroup with options from the same group
-        const firstSelect = document.getElementById('firstSelect');
-
-        const optionsInGroup = Array.from(firstSelect.options);
-        optionsInGroup.forEach(function(option) {
-            const optionElement = document.createElement('option');
-            optionElement.value = option.value;
-            optionElement.textContent = option.textContent;
-            newSelect.appendChild(optionElement);
-        });
-
-    }
-
-
-    // Update the hidden input field with user choices
-    userChoicesInput.value = userChoices.join(',');
-
-});
-
-    </script>
-                    <div class="button-container">
-                    <button type="button" id="constrains">Create session constrains</button>
-                    <br><br><br>
-                    <button type="submit" id="first">Build</button>
-                    <br>
-                    </div>
+        <input type="hidden" id="userChoices" name="userChoices">
+        <script>
+             // Get references to the form and select elements
+            const categoryForm = document.getElementById('categoryForm');
+            const selectContainer = document.getElementById('selectContainer');
+            const submitButton = document.querySelector('input[type="submit"]');
+            const userChoicesInput = document.getElementById('userChoices');
+            
+            // User choices array to store selections
+            const userChoices = [];
+            
+            // Counter for generating unique names
+            let selectCounter = 1;
+            
+            
+            // Event listener to handle changes in the selects
+            selectContainer.addEventListener('change', function(event) {
+                const select = event.target;
+                // Inside your selectContainer event listener
+            // Update the hidden input field with user choices
+            userChoicesInput.value = userChoices.join(',');
+                if (select.value === 'none') {
+                    // If the selected option is 'none', remove this select and clear its value
+                    selectContainer.removeChild(select);
+                    userChoices.pop(); // Remove the last choice
+                } else {
+                    userChoices.push(select.value); // Store the choice
+            
+                    // Create a new select element
+                    const newSelect = document.createElement('select');
+                    newSelect.name = `category_${selectCounter++}`; // Assign a unique name
+                    selectContainer.appendChild(newSelect);
+            
+                    // Add a line break for spacing
+                    selectContainer.appendChild(document.createElement('br'));
+            
+                    // Show the new select element
+                    newSelect.style.display = 'block';
+            
+                    // Populate the new optgroup with options from the same group
+                    const firstSelect = document.getElementById('firstSelect');
+            
+                    const optionsInGroup = Array.from(firstSelect.options);
+                    optionsInGroup.forEach(function(option) {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = option.value;
+                        optionElement.textContent = option.textContent;
+                        newSelect.appendChild(optionElement);
+                    });
+            
+                }
+            
+            
+                // Update the hidden input field with user choices
+                userChoicesInput.value = userChoices.join(',');
+            
+            });
+            
+        </script>
+        <div class="button-container">
+        <button type="button" id="constrains">Create session constrains</button>
+        <br><br><br>
+        <button type="submit" id="first">Build</button>
+        <br>
+        </div>
     </div>
     <div class="box" id="secondBox" style="display: none;">
         <h2>Create session's first constrain</h2>
@@ -125,7 +121,6 @@ userChoicesInput.value = userChoices.join(',');
                 <option value="{{ family }}">{{ family }}</option>
                 {% endfor %}
             </select>
-
         <h3>Select a parameter</h3>
         <select id="const_parameter2" name="const_parameter2">
                 <option value="Total Distance">Total Distance</option>
@@ -142,33 +137,33 @@ userChoicesInput.value = userChoices.join(',');
                 <option value="Decelerations">Decelerations</option>
                 <option value="HML Distance">HML Distance</option>
                 <option value="HMLD Per Minute">HMLD Per Minute</option>
-            </select><br><br>
+        </select><br><br>
 
-            <h3>Select constrain range</h3>
-            <label  for="min_cons_range">from:</label>
-            <input type="number" id="min_cons_range" name="min_cons_range" min="0">
-            <br><br>
-            <label for="max_cons_range">up to:</label>
-            <input type="number" id="max_cons_range" name="max_cons_range" min="0">
-            <br><br>
-            <div class="button-container">
-            <button type="button" id="constrains2">Create another constrain</button>
-            <br><br>
-            <button type="submit" id="second">Build</button>
-            <br>
-            </div>
-    </div>
+        <h3>Select constrain range</h3>
+        <label  for="min_cons_range">from:</label>
+        <input type="number" id="min_cons_range" name="min_cons_range" min="0">
+        <br><br>
+        <label for="max_cons_range">up to:</label>
+        <input type="number" id="max_cons_range" name="max_cons_range" min="0">
+        <br><br>
+        <div class="button-container">
+        <button type="button" id="constrains2">Create another constrain</button>
+        <br><br>
+        <button type="submit" id="second">Build</button>
         <br>
+        </div>
+    </div>
+    <br>
 
     <div class="box" id="thirdBox" style="display: none;">
         <h2>Create session's second constrain</h2>
-            <h3>select drills families</h3>
-            <select id="con_drill3" name="con_drill3">
-                <option value="None" selected>None</option>
-                {% for family in drills_data %}
-                <option value="{{ family }}">{{ family }}</option>
-                {% endfor %}
-            </select>
+        <h3>select drills families</h3>
+        <select id="con_drill3" name="con_drill3">
+            <option value="None" selected>None</option>
+            {% for family in drills_data %}
+            <option value="{{ family }}">{{ family }}</option>
+            {% endfor %}
+        </select>
 
         <h3>Select a parameter</h3>
         <select id="const_parameter3" name="const_parameter3">
@@ -253,7 +248,7 @@ userChoicesInput.value = userChoices.join(',');
         <a class="nav-link" href="/logout" style="font-size: 14px;">Logout From {{ current_user.id }}</a>
         </navbar>
     </div>
-<script>
+    <script>
             document.getElementById('constrains').addEventListener('click', function () {
             document.getElementById('secondBox').style.display = 'block';
             document.getElementById('first').style.display = 'none';
@@ -271,6 +266,6 @@ userChoicesInput.value = userChoices.join(',');
             document.getElementById('third').style.display = 'none';
             document.getElementById('constrains3').style.display = 'none';
         });
-</script>
+    </script>
 </body>
 </html>
